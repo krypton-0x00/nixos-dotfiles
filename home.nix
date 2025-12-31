@@ -1,17 +1,17 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 {
-	home.username = "zazzu";
-	home.homeDirectory = "/home/zazzu";
-	home.stateVersion = "25.11";
-	
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			rebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles";
-		};
+  home.username = "zazzu";
+  home.homeDirectory = "/home/zazzu";
+  home.stateVersion = "25.11";
 
-	};
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles";
+    };
+
+  };
   programs.firefox = {
     enable = true;
 
@@ -25,144 +25,134 @@
     };
   };
 
- programs.git = {
-  enable = true;
+  programs.git = {
+    enable = true;
 
-  settings = {
-    user = {
-      name  = "krypton-0x00";
-      email = "shakirgulzar0x00@gmail.com";
+    settings = {
+      user = {
+        name = "krypton-0x00";
+        email = "shakirgulzar0x00@gmail.com";
+      };
+
+      github = {
+        user = "krypton-0x00";
+      };
     };
 
-    github = {
-      user = "krypton-0x00";
+    extraConfig = {
+      credential.helper = "libsecret";
     };
   };
-
-  extraConfig = {
-    credential.helper = "libsecret";
-  };
-};
 
   xdg.enable = true;
 
   xdg.configFile."hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/hypr";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/hypr";
     recursive = true;
   };
 
   xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/nvim";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/nvim";
     recursive = true;
   };
 
   xdg.configFile."kitty" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/kitty";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/kitty";
     recursive = true;
   };
 
   xdg.configFile."rofi" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/rofi";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/rofi";
     recursive = true;
   };
 
   xdg.configFile."swaync" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/swaync";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/swaync";
     recursive = true;
   };
 
   xdg.configFile."dunst" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/dunst";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/dunst";
     recursive = true;
   };
 
   xdg.configFile."tmux" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/tmux";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/tmux";
     recursive = true;
   };
 
   xdg.configFile."waybar" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/waybar";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/waybar";
     recursive = true;
   };
 
   xdg.configFile."cava" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/cava";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/cava";
     recursive = true;
   };
 
   # Firefox
   xdg.configFile."firefox/zazzu/chrome" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/zazzu/nixos-dotfiles/config/firefox/chrome";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/zazzu/nixos-dotfiles/config/firefox/chrome";
     recursive = true;
   };
 
-
-
-	home.packages = with pkgs; [
-		neovim
-		ripgrep
-		nil
-		nixpkgs-fmt
-		nodejs
+  home.packages = with pkgs; [
+    neovim
+    ripgrep
+    nil
+    nixpkgs-fmt
+    nodejs
     gh
     waypaper
     swww
-		  gcc
+    gcc
 
-      # ---- LSP servers ----
-  clang-tools          # C / C++ (clangd)
-  rust-analyzer        # Rust
-  nil                  # Nix LSP (nil)
-  nixd                 # optional alternative Nix LSP
+    jdk17
 
-  # ---- Formatters ----
-  rustfmt              # Rust
-  nixpkgs-fmt          # Nix formatter
+    # ---- LSP servers ----
+    clang-tools # C / C++ (clangd)
+    rust-analyzer # Rust
+    nil # Nix LSP (nil)
+    nixd # optional alternative Nix LSP
 
-  tree-sitter
+    # ---- Formatters ----
+    rustfmt # Rust
+    nixpkgs-fmt # Nix formatter
 
-		  kitty
-		  waybar
-		  dunst
-		  rofi
-		  nautilus
-		  vesktop
-		  firefox
-		  obsidian
-		  btop
+    tree-sitter
 
-		  hyprpaper
-		  hypridle
-		  hyprlock
-		  hyprpicker
+    kitty
+    waybar
+    dunst
+    rofi
+    nautilus
+    vesktop
+    firefox
+    obsidian
+    btop
 
-		  wl-clipboard
-		  cliphist
+    hyprpaper
+    hypridle
+    hyprlock
+    hyprpicker
 
-		  grim
-		  slurp
-		  grimblast
+    wl-clipboard
+    cliphist
 
-		  pamixer
-		  playerctl
+    grim
+    slurp
+    grimblast
 
-		  brightnessctl
+    pamixer
+    playerctl
 
-		  xdg-utils
-		  procps
-		  glib
+    brightnessctl
 
-	];
+    xdg-utils
+    procps
+    glib
+
+  ];
 
 }
