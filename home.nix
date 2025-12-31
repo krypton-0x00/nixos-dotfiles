@@ -54,11 +54,9 @@
       github = {
         user = "krypton-0x00";
       };
-    };
-
-    extraConfig = {
       credential.helper = "libsecret";
     };
+
   };
 
   xdg.enable = true;

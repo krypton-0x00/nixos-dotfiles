@@ -150,6 +150,8 @@
     xfce.tumbler
     gvfs
 
+    unzip
+    zip
     glib
     gsettings-desktop-schemas
     dconf
