@@ -12,6 +12,16 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  systemd.user.services.swww = {
+    description = "Wayland wallpaper daemon";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.swww}/bin/swww init";
+      Restart = "on-failure";
+    };
+  };
+
+
   
   hardware.bluetooth.enable = true;
    services.blueman.enable = true;

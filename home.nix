@@ -116,6 +116,8 @@
 		nixpkgs-fmt
 		nodejs
     gh
+    waypaper
+    swww
 		  gcc
 
 		  kitty
