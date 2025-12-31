@@ -26,6 +26,42 @@
     };
   };
 
+  #NVIDIA
+  # Graphics stack
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  # NVIDIA proprietary driver
+  hardware.nvidia = {
+    open = false;
+    modesetting.enable = true;
+
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+  };
+
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    offload.enableOffloadCmd = true;
+
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -90,6 +126,10 @@
     wget
     git
     bibata-cursors
+    vulkan-tools
+    mesa-demos
+    nvidia-vaapi-driver
+    libva
   ];
 
   fonts.packages = with pkgs; [

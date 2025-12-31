@@ -137,6 +137,8 @@
     hyprlock
     hyprpicker
 
+    cava
+
     wl-clipboard
     cliphist
 
