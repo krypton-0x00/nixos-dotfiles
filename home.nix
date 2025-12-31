@@ -12,6 +12,19 @@
 		};
 
 	};
+  programs.firefox = {
+    enable = true;
+
+    profiles.zazzu = {
+      id = 0;
+      name = "zazzu";
+
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      };
+    };
+  };
+
   programs.git = {
     enable = true;
 
@@ -75,6 +88,14 @@
     recursive = true;
   };
 
+  # Firefox
+  xdg.configFile."firefox/zazzu/chrome" = {
+    source = config.lib.file.mkOutOfStoreSymlink
+      "/home/zazzu/nixos-dotfiles/config/firefox/chrome";
+    recursive = true;
+  };
+
+
 
 	home.packages = with pkgs; [
 		neovim
@@ -82,6 +103,7 @@
 		nil
 		nixpkgs-fmt
 		nodejs
+    gh
 		  gcc
 
 		  kitty
