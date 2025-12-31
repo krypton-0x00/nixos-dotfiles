@@ -120,6 +120,18 @@
     swww
 		  gcc
 
+      # ---- LSP servers ----
+  clang-tools          # C / C++ (clangd)
+  rust-analyzer        # Rust
+  nil                  # Nix LSP (nil)
+  nixd                 # optional alternative Nix LSP
+
+  # ---- Formatters ----
+  rustfmt              # Rust
+  nixpkgs-fmt          # Nix formatter
+
+  tree-sitter
+
 		  kitty
 		  waybar
 		  dunst

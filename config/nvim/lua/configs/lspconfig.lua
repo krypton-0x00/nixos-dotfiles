@@ -1,6 +1,15 @@
+-- Load NvChad default LSP settings
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls" }
+-- Enable LSP servers (NvChad + Neovim 0.10+ style)
+local servers = {
+  "html",
+  "cssls",
+
+  "clangd",        -- C / C++
+  "rust_analyzer", -- Rust
+  "nil_ls",        -- Nix
+}
+
 vim.lsp.enable(servers)
 
--- read :h vim.lsp.config for changing options of lsp servers 

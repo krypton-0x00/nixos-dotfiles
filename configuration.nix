@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -21,17 +26,14 @@
     };
   };
 
-
-  
   hardware.bluetooth.enable = true;
-   services.blueman.enable = true;
-
+  services.blueman.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "nixos"; 
+  networking.hostName = "nixos";
 
   networking.networkmanager.enable = true;
 
@@ -39,44 +41,42 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-	enable = true;
-	autoRepeatDelay = 200;
-	autoRepeatInterval = 35;
+    enable = true;
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 35;
 
   };
   services.displayManager.sddm = {
-	enable = true;
-	wayland.enable = true;
+    enable = true;
+    wayland.enable = true;
   };
   programs.hyprland = {
-	enable = true;
-	xwayland.enable = true;
+    enable = true;
+    xwayland.enable = true;
   };
   xdg.portal = {
-	enable = true;
-	extraPortals = with pkgs; [
-		xdg-desktop-portal-hyprland
-	];
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
   };
 
-
-  
   services.printing.enable = true;
 
   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
+    enable = true;
+    pulse.enable = true;
+  };
 
   services.libinput.enable = true;
 
   users.users.zazzu = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-     ];
-   };
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";
@@ -86,21 +86,21 @@
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
-     neovim
-     wget
-     git
-     bibata-cursors
-   ];
+    neovim
+    wget
+    git
+    bibata-cursors
+  ];
 
   fonts.packages = with pkgs; [
-	nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
   #ENABLE FLAKES
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-
-
-  system.stateVersion = "25.11"; 
+  system.stateVersion = "25.11";
 
 }
-
