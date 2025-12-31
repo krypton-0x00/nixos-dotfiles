@@ -5,10 +5,27 @@
   home.homeDirectory = "/home/zazzu";
   home.stateVersion = "25.11";
 
+  gtk = {
+    enable = true;
+
+    theme = {
+      name = "Gruvbox-Dark";
+      package = pkgs.gruvbox-dark-gtk;
+    };
+
+    iconTheme = {
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-plus-icons;
+    };
+  };
+
   programs.bash = {
     enable = true;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles";
+      confedit = "nvim ~/nixos-dotfiles/configuration.nix ";
+      homedit = "nvim ~/nixos-dotfiles/home.nix";
+      flakedit = "nvim ~/nixos-dotfiles/flake.nix";
     };
 
   };
@@ -108,8 +125,11 @@
     swww
     gcc
 
-    jdk17
+    gruvbox-plus-icons
+    gruvbox-dark-gtk
+    lxappearance
 
+    javaPackages.compiler.temurin-bin.jdk-21
     # ---- LSP servers ----
     clang-tools # C / C++ (clangd)
     rust-analyzer # Rust

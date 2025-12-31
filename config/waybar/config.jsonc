@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "output": ["HDMI-A-1", "eDP-1"],
+  "output": ["HDMI-A-2", "eDP-1"],
   "modules-left": ["custom/launcher", "backlight", "wireplumber", "cpu", "mpris"],
   "modules-center": ["hyprland/workspaces", "clock"],
   "modules-right": ["wlr/taskbar", "custom/bluetooth", "network", "memory", "tray", "battery", "custom/updates"],

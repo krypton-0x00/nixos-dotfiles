@@ -17,6 +17,14 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  #thunar
+  programs.dconf.enable = true;
+  programs.thunar.enable = true;
+
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "thunar.desktop";
+  };
+
   systemd.user.services.swww = {
     description = "Wayland wallpaper daemon";
     wantedBy = [ "graphical-session.target" ];
@@ -94,6 +102,7 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
     ];
   };
 
@@ -118,7 +127,6 @@
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
   };
-
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -130,6 +138,22 @@
     mesa-demos
     nvidia-vaapi-driver
     libva
+
+    #THUNAR
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    xfce.thunar-media-tags-plugin
+
+    # Dependencies Thunar EXPECTS
+    xfce.exo
+    xfce.tumbler
+    gvfs
+
+    glib
+    gsettings-desktop-schemas
+    dconf
+
   ];
 
   fonts.packages = with pkgs; [
