@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
   ];
 
+  services.dbus.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,19 +42,16 @@
     enable = true;
     enable32Bit = true;
   };
+
   # NVIDIA proprietary driver
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
-
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-
+    powerManagement.enable = false; # Changed
+    powerManagement.finegrained = false; # Changed
     nvidiaSettings = true;
-
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
-
   hardware.nvidia.prime = {
     offload.enable = true;
     offload.enableOffloadCmd = true;
@@ -98,12 +97,15 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  programs.xwayland.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
+    config.common.default = "*";
   };
 
   services.printing.enable = true;
@@ -135,9 +137,14 @@
     git
     bibata-cursors
     vulkan-tools
+    # nvidia-offload
     mesa-demos
-    nvidia-vaapi-driver
     libva
+
+    #portal
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
 
     #THUNAR
     xfce.thunar
@@ -155,9 +162,26 @@
     glib
     gsettings-desktop-schemas
     dconf
-
   ];
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    xorg.libXxf86vm
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXinerama
+    xorg.libXi
+    mesa
+    # Add these:
+    libGL
+    libGLU
+    xorg.libXext
+    xorg.libxcb
+    xorg.libXdamage
+    xorg.libXfixes
+    stdenv.cc.cc.lib
+  ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
