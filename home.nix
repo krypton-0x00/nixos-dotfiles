@@ -26,23 +26,24 @@
   };
 
  programs.git = {
-    enable = true;
+  enable = true;
 
-    settings = {
-      user = {
-        name  = "krypton-0x00";
-        email = "shakirgulzar0x00@gmail.com";
-      };
-
-      github = {
-        user = "krypton-0x00";
-      };
+  settings = {
+    user = {
+      name  = "krypton-0x00";
+      email = "shakirgulzar0x00@gmail.com";
     };
 
-    extraConfig = {
-      credential.helper = "store";
+    github = {
+      user = "krypton-0x00";
     };
   };
+
+  extraConfig = {
+    credential.helper = "libsecret";
+  };
+};
+
   xdg.enable = true;
 
   xdg.configFile."hypr" = {

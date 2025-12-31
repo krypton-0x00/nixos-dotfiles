@@ -17,6 +17,8 @@
    services.blueman.enable = true;
 
 
+  services.gnome.gnome-keyring.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nixos"; 
